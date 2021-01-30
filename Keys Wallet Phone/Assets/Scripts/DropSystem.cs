@@ -5,6 +5,7 @@ using UnityEngine;
 public class DropSystem : MonoBehaviour
 {
     public float collisionCounter;
+    //Nessite une connection avec le player controller
     public bool isSprinting;
     public float collisionMultiplier; 
 
@@ -51,68 +52,8 @@ public class DropSystem : MonoBehaviour
         }
         if(value == 1)
         {
+            //Nécessite l'ajout d'une fonction ou Action pour faire Spawn les objets
             print("Function to drop object called");
         }
     }
 }
-
-
-
-
-/*Systeme collision perte objet
-
-float numberCollision = A chaque fois qu'un joeur entre en collision avec un objet → numberCollision += .01
-
-float speedModifier (
-    if(sprinting)
-    speedModifier = 1.5f;
-
-    if(!sprinting)
-    speedModifier = 1f;
-)
-
-Update (
-    CheckSpeed(other.sprinting);
-
-)
-
-
-
-OnCollisionEnter(Collider collider)
-{
-    if()
-}
-
-public void CheckSpeed(bool status)
-{
-    if(!status) speedModifier = 1f; 
-    else if(status) speedModifier = 1.5f;
-}
-
-
-public int DropObjet()
-{
-    if(numberCollision*speedModifier*Mathf.Random.RandomRange(0.5f,1.5f) <= 2) {
-        return null;
-        break;
-    }
-
-    if(numberCollision*speedModifier*Mathf.Random.RandomRange(0.5f,1.5f) > 2) {
-        return 1;
-        break;
-    }  
-}
-
-public void InstantiateObject(int value)
-{
-    if(!value)
-    {
-        print("No object dropped");
-        break;
-    }
-    if(value = 1)
-    {
-        
-    }
-}
-*/
