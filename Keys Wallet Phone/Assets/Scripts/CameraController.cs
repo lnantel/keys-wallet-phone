@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour {
 
     public float m_CameraPitchSpeed;
     public float m_CameraYawSpeed;
+    public float m_CameraHeight;
 
     public float Pitch { get; private set; }
     public float Yaw { get; private set; }
@@ -28,7 +29,7 @@ public class CameraController : MonoBehaviour {
 
     void LateUpdate() {
         //POSITION
-        transform.position = Vector3.Lerp(transform.position, PlayerStateManager.instance.transform.position + 1.65f * Vector3.up, Time.deltaTime / Time.fixedDeltaTime);
+        transform.position = Vector3.Lerp(transform.position, PlayerStateManager.instance.transform.position + m_CameraHeight * Vector3.up, Time.deltaTime / Time.fixedDeltaTime);
 
         if (PlayerStateManager.instance.Alive) {
             //ROTATION
