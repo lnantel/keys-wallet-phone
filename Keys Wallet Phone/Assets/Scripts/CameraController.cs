@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraController : MonoBehaviour {
     public static CameraController instance;
@@ -11,7 +12,7 @@ public class CameraController : MonoBehaviour {
 
     public float Pitch { get; private set; }
     public float Yaw { get; private set; }
-    private Camera cam;
+    private CinemachineVirtualCamera cam;
     private float defaultFOV;
 
     void Awake() {
@@ -23,8 +24,8 @@ public class CameraController : MonoBehaviour {
 
     void Start() {
         Pitch = 0.0f;
-        cam = GetComponent<Camera>();
-        defaultFOV = cam.fieldOfView;
+        cam = GetComponent<CinemachineVirtualCamera>();
+        defaultFOV = cam.m_Lens.FieldOfView;
     }
 
     void LateUpdate() {
@@ -49,16 +50,16 @@ public class CameraController : MonoBehaviour {
     }
 
     public void SetMagnification(float factor, float time) {
-        StartCoroutine(FOVTransition(cam.fieldOfView, defaultFOV / factor, time));
+        StartCoroutine(FOVTransition(cam.m_Lens.FieldOfView, defaultFOV / factor, time));
     }
 
     private IEnumerator FOVTransition(float initialFOV, float targetFOV, float time) {
         float timer = 0.0f;
         while (timer < time) {
-            cam.fieldOfView = Mathf.Lerp(initialFOV, targetFOV, timer / time);
+            cam.m_Lens.FieldOfView = Mathf.Lerp(initialFOV, targetFOV, timer / time);
             timer += Time.deltaTime;
             yield return new WaitForSeconds(0.0f);
         }
-        cam.fieldOfView = targetFOV;
+        cam.m_Lens.FieldOfView = targetFOV;
     }
 }

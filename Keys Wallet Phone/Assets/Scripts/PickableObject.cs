@@ -19,12 +19,12 @@ public class PickableObject : MonoBehaviour
 
     private void OnEnable()
     {
-        DebugWindow.objectsReenable += EnableObject;
+        Doormat.playerOnDoormat += EnableObject;
     }
 
     private void OnDisable()
     {
-        DebugWindow.objectsReenable -= EnableObject;
+        Doormat.playerOnDoormat -= EnableObject;
     }
 
     private void Awake()
@@ -40,13 +40,13 @@ public class PickableObject : MonoBehaviour
         _isPickedUp = false;
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
-    //    {
-    //        Pickup();
-    //    }
-    //}
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            Pickup();
+        }
+    }
 
     public void Pickup()
     {
