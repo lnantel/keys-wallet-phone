@@ -21,9 +21,17 @@ public class DebugWindow : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F3))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             debugCanvas.SetActive(!debugCanvas.activeSelf);
+            if (debugCanvas.activeSelf)
+            {
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
         }
     }
 
