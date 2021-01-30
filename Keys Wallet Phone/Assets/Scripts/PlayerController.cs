@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour {
             rb.constraints = RigidbodyConstraints.None;
         }
 
-        Debug.Log(state.Grounded);
+        //Debug.Log(state.Grounded);
     }
 
     private Vector3 CalculateMovement() {
