@@ -16,8 +16,8 @@ TagManager:
   - Player
   - GroundDetector
   - CollidableObjects
-  - 
-  - 
+  - PickableObjects
+  - Ground
   - 
   - 
   - 

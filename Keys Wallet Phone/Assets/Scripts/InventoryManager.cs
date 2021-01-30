@@ -24,13 +24,13 @@ public class InventoryManager : MonoBehaviour
     private void OnEnable()
     {
         PickableObject.objecPickedUp += AddToInventory;
-        DebugWindow.dropObject += DropRandomObject;
+        DropSystem.objectDrop += DropRandomObject;
     }
 
     private void OnDisable()
     {
         PickableObject.objecPickedUp -= AddToInventory;
-        DebugWindow.dropObject -= DropRandomObject;
+        DropSystem.objectDrop -= DropRandomObject;
     }
 
     private void AddToInventory(PickableObject obj)
