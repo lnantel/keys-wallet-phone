@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DropSystem : MonoBehaviour
 {
+    public static Action objectDrop;
+
     public float collisionCounter;
     //Nessite une connection avec le player controller
     public bool isSprinting;
@@ -22,22 +25,23 @@ public class DropSystem : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.LeftShift)) collisionMultiplier = 1.5f;
         if(Input.GetKeyUp(KeyCode.LeftShift)) collisionMultiplier = 1f;
     
-        print("Collision multiplier" +collisionMultiplier);
-        print("Number of collision" + collisionCounter);
+        //print("Collision multiplier" +collisionMultiplier);
+        //print("Number of collision" + collisionCounter);
     }
 
     private void OnCollisionEnter(Collision other) 
     {
-        if(other.gameObject.layer == 10)
+        if(other.gameObject.layer == LayerMask.NameToLayer("CollidableObjects"))
         {
             collisionCounter += .1f;
             InstantiateObject(DropObjet());
-        } 
+            Debug.Log("COLLISION");
+        }
     }
 
     public int DropObjet()
     {        
-        if(collisionCounter*collisionMultiplier * Random.Range(0.5f,1.5f) > 2) {
+        if(collisionCounter*collisionMultiplier * UnityEngine.Random.Range(0.5f,1.5f) > 2) {
             collisionCounter =0f;
             return 1;
         }  
@@ -54,6 +58,9 @@ public class DropSystem : MonoBehaviour
         {
             //Nécessite l'ajout d'une fonction ou Action pour faire Spawn les objets
             print("Function to drop object called");
+
+            if (objectDrop != null)
+                objectDrop();
         }
     }
 }

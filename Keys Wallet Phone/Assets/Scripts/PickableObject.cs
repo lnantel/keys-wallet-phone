@@ -40,6 +40,14 @@ public class PickableObject : MonoBehaviour
         _isPickedUp = false;
     }
 
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
+    //    {
+    //        Pickup();
+    //    }
+    //}
+
     public void Pickup()
     {
         if (!_isEnabled)
