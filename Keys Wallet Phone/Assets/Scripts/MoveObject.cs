@@ -9,69 +9,53 @@ public class MoveObject : MonoBehaviour
     public GameObject springConnection;
     public GameObject grabbedObject;
     public GameObject lookingAt;
-    public bool releaseTimer;
-    public bool hasSpringJoint;
     public LayerMask layerMask;
-    
+
+    private SpringJoint springJoint;
+    private float originalAngularDrag;
+    private SimpleMouseLook mouse;
+
     // Start is called before the first frame update
     void Start()
     {
         castDist = 2;
-        releaseTimer = true;
-        hasSpringJoint = false;
+        springJoint = springConnection.GetComponent<SpringJoint>();
+        mouse = GetComponent<SimpleMouseLook>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && grabbedObject != null ) ReleaseObject();
+        if (Input.GetMouseButtonUp(0) && grabbedObject != null) ReleaseObject();
+        if(Input.GetMouseButtonDown(0) && grabbedObject == null) GrabObject();
 
-        if(Input.GetMouseButtonDown(0) && grabbedObject == null && releaseTimer) GrabObject();
-
-
-
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, castDist,layerMask,QueryTriggerInteraction.UseGlobal) && !grabbedObject && !lookingAt)
+        bool raycast = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, castDist, layerMask, QueryTriggerInteraction.UseGlobal);
+        if (raycast && grabbedObject == null && lookingAt == null)
         {
             lookingAt = hit.transform.gameObject;
-            hit.transform.gameObject.AddComponent<Outline>().OutlineColor = Color.blue;
-            hit.transform.gameObject.GetComponent<Outline>().OutlineWidth = 10;
+            SetOutline(lookingAt, true, Color.blue);
         }
-        if(!Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, castDist,layerMask,QueryTriggerInteraction.UseGlobal) && !grabbedObject && lookingAt)
+        if(!raycast && grabbedObject == null && lookingAt != null)
         {
-            if(lookingAt.GetComponent<Outline>() != null) Destroy(lookingAt.GetComponent<Outline>());
+            SetOutline(lookingAt, false, Color.blue);
             lookingAt = null;
         }
     }
 
     public void GrabObject()
     {
-        if(Physics.Raycast(transform.position, transform.forward, out hit, castDist,layerMask,QueryTriggerInteraction.UseGlobal))
+        if(lookingAt != null)
         {
             print("Object Grabbed");
-        
-            if(hit.transform.gameObject.GetComponent<SpringJoint>() == null) {
-                hasSpringJoint = false;
-                print("Doesn't have joint");
-            } else hasSpringJoint = true;
+            grabbedObject = lookingAt;
 
-            switch (hasSpringJoint)
-            {
-            
-                case false :
-                    hit.transform.gameObject.AddComponent<SpringJoint>().connectedBody = springConnection.GetComponent<Rigidbody>();
-                    hit.transform.gameObject.GetComponent<Outline>().OutlineColor = Color.white;
-                    hit.transform.gameObject.GetComponent<Outline>().OutlineWidth = 10;
-                    grabbedObject = hit.transform.gameObject;
-                    break;
-
-                case true :
-                    hit.transform.gameObject.GetComponent<SpringJoint>().connectedBody = springConnection.GetComponent<Rigidbody>();
-                    hit.transform.gameObject.AddComponent<Outline>().OutlineColor = Color.white;
-                    hit.transform.gameObject.GetComponent<Outline>().OutlineWidth = 10;
-                    grabbedObject = hit.transform.gameObject;
-                    break;
-            }
-            
+            mouse.mouseSensitivityMultiplier = 0.5f;
+            Rigidbody grabbedObjectRigidbody = grabbedObject.GetComponent<Rigidbody>();
+            originalAngularDrag = grabbedObjectRigidbody.angularDrag;
+            grabbedObjectRigidbody.angularDrag = 100.0f;
+            springJoint.connectedBody = grabbedObjectRigidbody;
+            springJoint.connectedAnchor = grabbedObject.transform.InverseTransformPoint(hit.point);
+            SetOutline(grabbedObject, true, Color.white);            
         }
 
         else print("No object grabbed");
@@ -79,23 +63,25 @@ public class MoveObject : MonoBehaviour
 
     public void ReleaseObject()
     {
-
-        
-        Destroy(grabbedObject.GetComponent<SpringJoint>());
-        Destroy(grabbedObject.GetComponent<Outline>());
+        springJoint.connectedBody.angularDrag = originalAngularDrag;
+        float velocity = Mathf.Clamp(springJoint.connectedBody.velocity.magnitude, 0.0f, 10.0f);
+        springJoint.connectedBody.velocity = springJoint.connectedBody.velocity.normalized * velocity;
+        springJoint.connectedBody = null;
+        SetOutline(grabbedObject, true, Color.blue);
         grabbedObject = null;
-        hasSpringJoint = true;
+        mouse.mouseSensitivityMultiplier = 1.0f;
+
         print("Object Released");
-        StartCoroutine(WaitAfterRelease());
     }
 
-    IEnumerator WaitAfterRelease()
-    {
-        releaseTimer = false;
-        yield return new WaitForSeconds(2);
-        releaseTimer = true;
-
-        
+    void SetOutline(GameObject obj, bool enabled, Color color, float width = 10.0f) {
+        Outline outline = obj.GetComponent<Outline>();
+        if (outline == null) {
+            obj.AddComponent<Outline>();
+            outline = obj.GetComponent<Outline>();
+        }
+        outline.enabled = enabled;
+        outline.OutlineColor = color;
+        outline.OutlineWidth = width;
     }
-
 }
