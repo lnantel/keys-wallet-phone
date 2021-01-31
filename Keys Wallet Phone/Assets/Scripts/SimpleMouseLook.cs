@@ -7,6 +7,7 @@ public class SimpleMouseLook : MonoBehaviour
 {
     public Transform player;
     public float mouseSensitivity;
+    public float mouseSensitivityMultiplier;
 
     private float xRotation = 0f;
     private float yRotation = 0f;
@@ -54,8 +55,8 @@ public class SimpleMouseLook : MonoBehaviour
 
     private void MouseRotation()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * mouseSensitivityMultiplier;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * mouseSensitivityMultiplier;
 
         xRotation -= mouseY;
         yRotation -= mouseX;
