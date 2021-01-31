@@ -167,8 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b744104db20d292498b296eb2f59677d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 200
+  walkSpeed: 0
+  sprintSpeed: 0
   rotationSpeed: 0
+  IsSprinting: 0
 --- !u!114 &2325166832613570161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionCounter: 0
-  isSprinting: 0
   collisionMultiplier: 0
 --- !u!1 &2325166833646361450
 GameObject:
@@ -283,5 +284,9 @@ MonoBehaviour:
   castDist: 0
   springConnection: {fileID: 686752639}
   grabbedObject: {fileID: 0}
+  lookingAt: {fileID: 0}
   releaseTimer: 0
   hasSpringJoint: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1024

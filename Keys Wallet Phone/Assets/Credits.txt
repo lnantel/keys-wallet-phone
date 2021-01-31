@@ -1,1 +1,2 @@
 Font : Astigmatic One Eye Typographic Institute, https://www.1001freefonts.com/luckiest-guy.font
+Outline Shader : Chris Nole, https://assetstore.unity.com/packages/tools/particles-effects/quick-outline-115488 
