@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour {
     [HideInInspector]
     public Sound currentMusic;
 
+    private int stressLevel = 1;
+
     // Start is called before the first frame update
     void Awake() {
         if (instance == null) {
@@ -37,6 +39,10 @@ public class AudioManager : MonoBehaviour {
 
     private void Start() {
         DropSystem.playerCollided += PlayerCollision;
+        PickableObject.objectDropped += ObjectDropped;
+        PickableObject.objecPickedUp += ObjectPickedUp;
+        TimerManager.timerStep += IncreaseStressLevel;
+
         PlayTheme("level1");
     }
 
@@ -86,5 +92,18 @@ public class AudioManager : MonoBehaviour {
 
         int ouch = UnityEngine.Random.Range(1, 5);
         PlaySound("Ouch" + ouch);
+    }
+
+    private void ObjectDropped(PickableObject obj) {
+        PlaySound("Lost_" + obj.name);
+    }
+
+    private void ObjectPickedUp(PickableObject obj) {
+        PlaySound("PickUp_" + obj.name);
+    }
+
+    private void IncreaseStressLevel() {
+        stressLevel = ((stressLevel + 1) % 8) + 1;
+        PlayTheme("level" + stressLevel);
     }
 }
