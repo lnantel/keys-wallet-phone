@@ -9,8 +9,6 @@ public class AudioManager : MonoBehaviour {
     [HideInInspector]
     public Sound currentMusic;
 
-    private int stressLevel = 1;
-
     // Start is called before the first frame update
     void Awake() {
         if (instance == null) {
@@ -28,7 +26,7 @@ public class AudioManager : MonoBehaviour {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
 
-            s.source.volume = s.volume * 0.3f /* SettingsManager.instance.MainVolume*/;
+            s.source.volume = s.volume * 0.3f /*SettingsManager.instance.MainVolume*/;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
             s.source.spatialBlend = 0.0f;
@@ -41,25 +39,30 @@ public class AudioManager : MonoBehaviour {
         DropSystem.playerCollided += PlayerCollision;
         PickableObject.objectDropped += ObjectDropped;
         PickableObject.objecPickedUp += ObjectPickedUp;
-        TimerManager.timerStep += IncreaseStressLevel;
-
-        PlayTheme("level1");
-    }
-
-    private void Update() {
-        transform.position = FindObjectOfType<SimplePlayerController>().transform.position;
+        TimerManager.reachedStep += IncreaseStressLevel;
+        Doormat.keysCheck += KeysCheck;
+        Doormat.walletCheck += WalletCheck;
+        Doormat.phoneCheck += PhoneCheck;
+        Doormat.success += DoorSuccess;
     }
 
     private void AssignMusicOnScene(Scene scene1, Scene scene2) {
-        //if (SceneManager.GetActiveScene().name == "Arena_1" || SceneManager.GetActiveScene().name == "Arena_2" || SceneManager.GetActiveScene().name == "Arena_3") {
-        //    PlayTheme("Main_Loop");
-        //}
+        if (SceneManager.GetActiveScene().name == "Main") {
+            PlayTheme("level1");
+        }
 
-        //if (SceneManager.GetActiveScene().name == "MainMenu") {
-        //    if (currentMusic.source != null) {
-        //        currentMusic.source.Stop();
-        //    }
-        //}
+        if (SceneManager.GetActiveScene().name == "MainMenu") {
+            PlayTheme("menu");
+        }
+
+        if(SceneManager.GetActiveScene().name == "LoseScreen") {
+            PlaySound("voice8");
+            PlayTheme("mort");
+        }
+
+        if(SceneManager.GetActiveScene().name == "WinScreen") {
+            PlayTheme("succès");
+        }
     }
 
     public void PlaySound(string name) {
@@ -102,8 +105,25 @@ public class AudioManager : MonoBehaviour {
         PlaySound("PickUp_" + obj.name);
     }
 
-    private void IncreaseStressLevel() {
-        stressLevel = ((stressLevel + 1) % 8) + 1;
-        PlayTheme("level" + stressLevel);
+    private void IncreaseStressLevel(int step) {
+        PlayTheme("level" + (step + 1));
+        if(step > 0)
+            PlaySound("voice" + (step));
+    }
+
+    private void KeysCheck() {
+        PlaySound("FrontDoor_Key");
+    }
+
+    private void WalletCheck() {
+        PlaySound("FrontDoor_Wallet");
+    }
+
+    private void PhoneCheck() {
+        PlaySound("FrontDoor_Phone");
+    }
+
+    private void DoorSuccess() {
+        PlaySound("FrontDoor_Success");
     }
 }

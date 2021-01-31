@@ -10,6 +10,7 @@ using TMPro;
 public class TimerManager : MonoBehaviour
 {
     public static Action timerStep;
+    public static Action<int> reachedStep;
 
     public TextMeshProUGUI timerText;
     public Volume volume;
@@ -31,6 +32,7 @@ public class TimerManager : MonoBehaviour
         _CurrentTime = timerDuration;
         volume.profile.TryGet(out _ColorAdj);
         volume.profile.TryGet(out _ChromaticAb);
+        reachedStep(_CurrentStepIndex);
     }
 
     private void Update()
@@ -76,8 +78,10 @@ public class TimerManager : MonoBehaviour
 
         else
         {
-            if (timerStep != null)
+            if (timerStep != null) {
                 timerStep();
+                reachedStep(_CurrentStepIndex);
+            }
         }
 
         yield return new WaitForSeconds(1f);

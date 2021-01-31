@@ -9,6 +9,12 @@ using TMPro;
 
 public class Doormat : MonoBehaviour
 {
+    public static Action keysCheck;
+    public static Action phoneCheck;
+    public static Action walletCheck;
+    public static Action missingObject;
+    public static Action success;
+
     public static Action playerOnDoormat;
     public static Action playerExitDoormat;
     public CinemachineVirtualCamera doorCam;
@@ -115,6 +121,7 @@ public class Doormat : MonoBehaviour
                             _eventState = DoormatEventState.Keys;
                             burstParticles.transform.position = burstPos1.position;
                             burstParticles.Play();
+                            keysCheck();
                         }
                         else
                         {
@@ -137,6 +144,7 @@ public class Doormat : MonoBehaviour
                             _eventState = DoormatEventState.Wallet;
                             burstParticles.transform.position = burstPos2.position;
                             burstParticles.Play();
+                            walletCheck();
                         }
                         else
                         {
@@ -158,6 +166,7 @@ public class Doormat : MonoBehaviour
                             _eventState = DoormatEventState.Phone;
                             burstParticles.transform.position = burstPos3.position;
                             burstParticles.Play();
+                            phoneCheck();
                         }
                         else
                         {
@@ -171,6 +180,7 @@ public class Doormat : MonoBehaviour
             case DoormatEventState.Phone:
                 {
                     LevelManager.instance.LoadScene("WinScreen", Color.white);
+                    success();
                     break;
                 }
         }

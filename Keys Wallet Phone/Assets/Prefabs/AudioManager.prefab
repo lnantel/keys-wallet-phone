@@ -98,6 +98,18 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: mort
+    clip: {fileID: 8300000, guid: b2b07defc56bacd41a23cb3db35e543f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: "succ\xE8s"
+    clip: {fileID: 8300000, guid: 845a0f676ea36344ab0df4aa58279d92, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
   - name: FrontDoor_Phone
     clip: {fileID: 8300000, guid: 229ab5149c9543846ada365b6ca79619, type: 3}
     volume: 1
@@ -196,6 +208,54 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Ouch4
     clip: {fileID: 8300000, guid: 20e1ecb9f8e7bc147a0beba41e16aca8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: voice1
+    clip: {fileID: 8300000, guid: 25e99b9973651434c9490c7483f894d3, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: voice2
+    clip: {fileID: 8300000, guid: 25c7848384bf36946923a171827c9c2b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: voice3
+    clip: {fileID: 8300000, guid: 2d18a3f3c4461144daf0224feba29475, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: voice4
+    clip: {fileID: 8300000, guid: b3f0ad2a0c86c054fa2eb7c57648eaae, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: voice5
+    clip: {fileID: 8300000, guid: 0f6f8c3f83d8ecf428c08451a0e5f3a7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: voice6
+    clip: {fileID: 8300000, guid: 0b6018924ff11094eab6b70d41f153b2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: voice7
+    clip: {fileID: 8300000, guid: 51f31d034187a8e478e3c7cdaf484e8f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: voice8
+    clip: {fileID: 8300000, guid: b59ae726bdbfd944796270e9a196f013, type: 3}
     volume: 1
     pitch: 1
     loop: 0
