@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
@@ -157,6 +158,7 @@ public class Doormat : MonoBehaviour
 
             case DoormatEventState.Phone:
                 {
+                    SceneManager.LoadScene("WinScreen");
                     break;
                 }
         }
