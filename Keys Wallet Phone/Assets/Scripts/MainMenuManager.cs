@@ -11,7 +11,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void PlayGame()
     {
-        LevelManager.instance.LoadScene("Main", Color.black);
+        LevelManager.instance.LoadScene("TutorialScreen", Color.black);
     }
 
     public void ExitGame()
