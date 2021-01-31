@@ -44,6 +44,7 @@ public class AudioManager : MonoBehaviour {
         Doormat.walletCheck += WalletCheck;
         Doormat.phoneCheck += PhoneCheck;
         Doormat.success += DoorSuccess;
+        Doormat.missingObject += ObjectMissing;
     }
 
     private void AssignMusicOnScene(Scene scene1, Scene scene2) {
@@ -121,6 +122,10 @@ public class AudioManager : MonoBehaviour {
 
     private void PhoneCheck() {
         PlaySound("FrontDoor_Phone");
+    }
+
+    private void ObjectMissing() {
+        PlaySound("FrontDoor_Missing");
     }
 
     private void DoorSuccess() {
