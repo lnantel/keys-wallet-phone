@@ -77,7 +77,7 @@ public class InventoryManager : MonoBehaviour
     // TODO : Add bounds
     private Vector3 GetRandomPosition()
     {
-        Vector3 playerPos = PlayerController.instance.transform.position;
+        Vector3 playerPos = GameManager.instance.CurrentPlayer.transform.position;
         float x = playerPos.x + Random.Range(-2f, 2f);
         float y = playerPos.y + 1f;
         float z = playerPos.z + Random.Range(-2f, 2f);
