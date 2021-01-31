@@ -27,6 +27,9 @@ public class SimpleMouseLook : MonoBehaviour
 
     private bool overrideControls;
 
+    private float startXRotation;
+    private float startYRotation;
+
     private void Awake()
     {
         _Vcam = GetComponent<CinemachineVirtualCamera>();
@@ -63,6 +66,12 @@ public class SimpleMouseLook : MonoBehaviour
     {
         CurrentTrembleAmplitude += 0.2f;
         CurrentTrembleFrequency += 1f;
+    }
+
+    private void Start()
+    {
+        xRotation = player.transform.rotation.eulerAngles.x;
+        yRotation = -player.transform.rotation.eulerAngles.y;
     }
 
     private void Update()

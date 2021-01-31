@@ -461,7 +461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 2125707702334565350}
   volume: {fileID: 0}
-  timerDuration: 10
+  timerDuration: 30
   timerSteps:
   - I'll be late for work!
   - I'll lose my parking rights!
