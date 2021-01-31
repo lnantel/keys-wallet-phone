@@ -32,7 +32,8 @@ public class TimerManager : MonoBehaviour
         _CurrentTime = timerDuration;
         volume.profile.TryGet(out _ColorAdj);
         volume.profile.TryGet(out _ChromaticAb);
-        reachedStep(_CurrentStepIndex);
+        if (reachedStep != null)
+            reachedStep(_CurrentStepIndex);
     }
 
     private void Update()
