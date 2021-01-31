@@ -5,12 +5,18 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using TMPro;
 
 public class Doormat : MonoBehaviour
 {
     public static Action playerOnDoormat;
     public static Action playerExitDoormat;
     public CinemachineVirtualCamera doorCam;
+
+    public ParticleSystem burstParticles;
+    public Transform burstPos1;
+    public Transform burstPos2;
+    public Transform burstPos3;
 
     // Button references
     public GameObject keysImage;
@@ -107,6 +113,8 @@ public class Doormat : MonoBehaviour
                         {
                             w_Key.SetActive(true);
                             _eventState = DoormatEventState.Keys;
+                            burstParticles.transform.position = burstPos1.position;
+                            burstParticles.Play();
                         }
                         else
                         {
@@ -127,6 +135,8 @@ public class Doormat : MonoBehaviour
                         {
                             p_Key.SetActive(true);
                             _eventState = DoormatEventState.Wallet;
+                            burstParticles.transform.position = burstPos2.position;
+                            burstParticles.Play();
                         }
                         else
                         {
@@ -146,6 +156,8 @@ public class Doormat : MonoBehaviour
                         if (InventoryManager.instance.CheckForObject("Phone"))
                         {
                             _eventState = DoormatEventState.Phone;
+                            burstParticles.transform.position = burstPos3.position;
+                            burstParticles.Play();
                         }
                         else
                         {
@@ -184,13 +196,13 @@ public class Doormat : MonoBehaviour
     private IEnumerator EndEventTimer(GameObject missingObject)
     {
         missingObject.SetActive(true);
-        Image image = missingObject.GetComponent<Image>();
-        image.color = Color.red;
+        TextMeshProUGUI missingText = missingObject.GetComponentInChildren<TextMeshProUGUI>();
+        missingText.color = Color.red;
 
         yield return new WaitForSeconds(1f);
         _currentEndTimer = null;
         EndDoorEvent();
-        image.color = Color.white;
+        missingText.color = Color.white;
     }
         
 }

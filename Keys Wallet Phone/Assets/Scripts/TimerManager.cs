@@ -26,7 +26,6 @@ public class TimerManager : MonoBehaviour
         _CurrentTime = timerDuration;
         volume.profile.TryGet(out _ColorAdj);
         volume.profile.TryGet(out _ChromaticAb);
-
     }
 
     private void Update()
