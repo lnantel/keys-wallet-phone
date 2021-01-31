@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public static Action<SimplePlayerController> playerLoaded;
 
     public SimplePlayerController CurrentPlayer { get; private set; }
 
@@ -23,6 +25,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += AssignPlayer;
@@ -36,5 +44,11 @@ public class GameManager : MonoBehaviour
     private void AssignPlayer(Scene scene, LoadSceneMode loadSceneMode)
     {
         CurrentPlayer = FindObjectOfType<SimplePlayerController>();
+
+        if (CurrentPlayer != null)
+        {
+            if (playerLoaded != null)
+                playerLoaded(CurrentPlayer);
+        }
     }
 }

@@ -6,11 +6,26 @@ using UnityEngine;
 public class DropSystem : MonoBehaviour
 {
     public static Action objectDrop;
+    public static Action playerCollided;
 
     public float collisionCounter;
     //Nessite une connection avec le player controller
-    public bool isSprinting;
-    public float collisionMultiplier; 
+
+    private SimplePlayerController _Player;
+
+    public float collisionMultiplier;
+
+    private void OnEnable()
+    {
+        GameManager.playerLoaded += AssignPlayer;
+        Doormat.playerOnDoormat += ResetCollisionCounter;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.playerLoaded -= AssignPlayer;
+        Doormat.playerOnDoormat -= ResetCollisionCounter;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -22,18 +37,32 @@ public class DropSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.LeftShift)) collisionMultiplier = 1.5f;
-        if(Input.GetKeyUp(KeyCode.LeftShift)) collisionMultiplier = 1f;
-    
+        if (_Player != null)
+        {
+            collisionMultiplier = _Player.IsSprinting ? 1.5f : 1f;
+        }
         //print("Collision multiplier" +collisionMultiplier);
         //print("Number of collision" + collisionCounter);
+    }
+
+    private void AssignPlayer(SimplePlayerController player)
+    {
+        _Player = player;
+    }
+
+    private void ResetCollisionCounter()
+    {
+        collisionCounter = 0f;
     }
 
     private void OnCollisionEnter(Collision other) 
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("CollidableObjects"))
         {
-            collisionCounter += .1f;
+            if (playerCollided != null)
+                playerCollided();
+
+            collisionCounter += (.1f * collisionMultiplier);
             InstantiateObject(DropObjet());
             Debug.Log("COLLISION");
         }
