@@ -43,7 +43,163 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 750aa1f9b30ff95419ae7a00b0abc4bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: menu
+    clip: {fileID: 8300000, guid: 40ac46a3fb9c8dd4ba20e18a9f078a5c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: level1
+    clip: {fileID: 8300000, guid: 53f70acd02faeaf41a46f82725b418dc, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: level2
+    clip: {fileID: 8300000, guid: c05b03eb6bc776f418c068472a9d2dcb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: level3
+    clip: {fileID: 8300000, guid: e96f0800ba92ac448a00d0cd3110a788, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: level4
+    clip: {fileID: 8300000, guid: 114d22a71971355419a1a0a3f90ccf24, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: level5
+    clip: {fileID: 8300000, guid: 89d9d87be5c6ce942bfd6d7431814aef, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: level6
+    clip: {fileID: 8300000, guid: ba03ecadcbc42f1479a2a18f85ecdba6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: level7
+    clip: {fileID: 8300000, guid: 55c0f5b97530ac84a861289163580450, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: level8
+    clip: {fileID: 8300000, guid: a3f91c5664ba14c4eae71719ab93ae46, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: FrontDoor_Phone
+    clip: {fileID: 8300000, guid: 229ab5149c9543846ada365b6ca79619, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: FrontDoor_Missing
+    clip: {fileID: 8300000, guid: 0c53bb8ec94fc34449afdbf708437784, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: FrontDoor_Key
+    clip: {fileID: 8300000, guid: f9e58c96725ab2646931084dac09e4d5, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: FrontDoor_Success
+    clip: {fileID: 8300000, guid: aec49aacffa18e44aa39644897002b98, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: FrontDoor_Wallet
+    clip: {fileID: 8300000, guid: e6178b40745c3f845ba4b32bb9d34291, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Object_Hit1
+    clip: {fileID: 8300000, guid: 34e4e403566df0d43842d7bf76b2317e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Object_Hit2
+    clip: {fileID: 8300000, guid: 6d55f4c2cba7cb74b96211d9b2f441f7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Lost_Phone
+    clip: {fileID: 8300000, guid: e8498dab0729515459f9fcd1698f2018, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Lost_Keys
+    clip: {fileID: 8300000, guid: 9039e06e2b675e9418d4762e93ee4133, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Lost_Wallet
+    clip: {fileID: 8300000, guid: a2c2a9e47b7df13479e1a29de37ec417, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PickUp_Phone
+    clip: {fileID: 8300000, guid: c6c2c4b4097e7674781c510b66747bf7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PickUp_Keys
+    clip: {fileID: 8300000, guid: c5384fea2d770ab448daa3d5d8077f96, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PickUp_Wallet
+    clip: {fileID: 8300000, guid: 3b69bc43cc609b445bb81f5545ade284, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Ouch1
+    clip: {fileID: 8300000, guid: c2da4125ffe1b6b4293e9a3ce1c21d56, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Ouch2
+    clip: {fileID: 8300000, guid: 5dddfcf2779d3e646a635cb401c28ceb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Ouch3
+    clip: {fileID: 8300000, guid: 5720abc5dbb7c2a429e317c98e969419, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Ouch4
+    clip: {fileID: 8300000, guid: 20e1ecb9f8e7bc147a0beba41e16aca8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   currentMusic:
     name: 
     clip: {fileID: 0}

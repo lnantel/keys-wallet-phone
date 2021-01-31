@@ -26,12 +26,22 @@ public class AudioManager : MonoBehaviour {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
 
-            s.source.volume = s.volume * SettingsManager.instance.MainVolume;
+            s.source.volume = s.volume * 0.3f /* SettingsManager.instance.MainVolume*/;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+            s.source.spatialBlend = 0.0f;
         }
 
         SceneManager.activeSceneChanged += AssignMusicOnScene;
+    }
+
+    private void Start() {
+        DropSystem.playerCollided += PlayerCollision;
+        PlayTheme("level1");
+    }
+
+    private void Update() {
+        transform.position = FindObjectOfType<SimplePlayerController>().transform.position;
     }
 
     private void AssignMusicOnScene(Scene scene1, Scene scene2) {
@@ -44,7 +54,6 @@ public class AudioManager : MonoBehaviour {
         //        currentMusic.source.Stop();
         //    }
         //}
-
     }
 
     public void PlaySound(string name) {
@@ -53,7 +62,6 @@ public class AudioManager : MonoBehaviour {
             Debug.LogWarning("Sound: " + name + " not found!");
             return;
         }
-
         s.source.Play();
     }
 
@@ -70,5 +78,13 @@ public class AudioManager : MonoBehaviour {
 
         currentMusic = s;
         currentMusic.source.Play();
+    }
+
+    private void PlayerCollision() {
+        int objectHit = UnityEngine.Random.Range(1, 3);
+        PlaySound("Object_Hit" + objectHit);
+
+        int ouch = UnityEngine.Random.Range(1, 5);
+        PlaySound("Ouch" + ouch);
     }
 }
