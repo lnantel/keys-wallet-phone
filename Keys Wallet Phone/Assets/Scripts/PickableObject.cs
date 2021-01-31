@@ -8,6 +8,7 @@ using System;
 public class PickableObject : MonoBehaviour
 {
     public static Action<PickableObject> objecPickedUp;
+    public static Action<PickableObject> objectDropped;
     public string objectName;
 
     public Vector3[] spawnPosition; 
@@ -96,11 +97,13 @@ public class PickableObject : MonoBehaviour
             this.transform.position = spawnPosition[UnityEngine.Random.Range(0,9)];
             print("Object Dropped " + this.transform.position);
         }
+        objectDropped(this);
     }
 
     public void Drop(Vector3 dropPosition)
     {
         _isPickedUp = false;
         this.transform.position = dropPosition;
+        objectDropped(this);
     }
 }
