@@ -2,11 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class TimerManager : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
+    public Volume volume;
+    private ColorAdjustments _ColorAdj;
+    private ChromaticAberration _ChromaticAb;
     public float timerDuration;
     private float _CurrentTime;
 
@@ -18,6 +24,8 @@ public class TimerManager : MonoBehaviour
     {
         _CurrentStepIndex = 0;
         _CurrentTime = timerDuration;
+        volume.profile.TryGet(out _ColorAdj);
+        volume.profile.TryGet(out _ChromaticAb);
     }
 
     private void Update()
@@ -48,11 +56,16 @@ public class TimerManager : MonoBehaviour
 
         timerText.text = timerSteps[_CurrentStepIndex];
         _CurrentStepIndex++;
+        
+        _ColorAdj.saturation.value -= 10;
+        _ChromaticAb.intensity.value += 0.1f;
 
         if (_CurrentStepIndex >= timerSteps.Count)
         {
             // Trigger end game
             Debug.Log("END GAME");
+            SceneManager.LoadScene("LoseScreen");
+            
         }
 
         yield return new WaitForSeconds(1f);

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 686752640}
   - component: {fileID: 686752641}
+  - component: {fileID: 876873018280058467}
   m_Layer: 0
   m_Name: SpringConnection
   m_TagString: Untagged
@@ -47,6 +48,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!145 &876873018280058467
+SpringJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686752639}
+  m_ConnectedBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Spring: 500
+  m_Damper: 0
+  m_MinDistance: 0
+  m_MaxDistance: 0
+  m_Tolerance: 0.025
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &2325166832003596912
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,6 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2325166832897980184}
   mouseSensitivity: 5
+  mouseSensitivityMultiplier: 1
 --- !u!114 &2325166832613570164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,8 +328,6 @@ MonoBehaviour:
   springConnection: {fileID: 686752639}
   grabbedObject: {fileID: 0}
   lookingAt: {fileID: 0}
-  releaseTimer: 0
-  hasSpringJoint: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 1024

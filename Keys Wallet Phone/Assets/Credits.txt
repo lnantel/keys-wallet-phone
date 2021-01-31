@@ -1,2 +1,3 @@
 Font : Astigmatic One Eye Typographic Institute, https://www.1001freefonts.com/luckiest-guy.font
-Outline Shader : Chris Nole, https://assetstore.unity.com/packages/tools/particles-effects/quick-outline-115488 
+Outline Shader : Chris Nole, https://assetstore.unity.com/packages/tools/particles-effects/quick-outline-115488
+Farland Skies - Cloudy Crown : Borodar, https://assetstore.unity.com/packages/2d/textures-materials/sky/farland-skies-cloudy-crown-60004   
