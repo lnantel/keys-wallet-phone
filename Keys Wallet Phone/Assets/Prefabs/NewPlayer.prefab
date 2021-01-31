@@ -60,8 +60,8 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
+  m_Spring: 500
+  m_Damper: 0
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -311,6 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2325166832897980184}
   mouseSensitivity: 5
+  mouseSensitivityMultiplier: 1
 --- !u!114 &2325166832613570164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,8 +328,6 @@ MonoBehaviour:
   springConnection: {fileID: 686752639}
   grabbedObject: {fileID: 0}
   lookingAt: {fileID: 0}
-  releaseTimer: 0
-  hasSpringJoint: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 1024

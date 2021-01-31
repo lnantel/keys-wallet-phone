@@ -55,8 +55,8 @@ public class SimpleMouseLook : MonoBehaviour
 
     private void MouseRotation()
     {
-        float mouseX = Input.GetAxis("Mouse X") * SettingsManager.instance.MouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * SettingsManager.instance.MouseSensitivity;
+        float mouseX = Input.GetAxis("Mouse X") * SettingsManager.instance.MouseSensitivity * mouseSensitivityMultiplier;
+        float mouseY = Input.GetAxis("Mouse Y") * SettingsManager.instance.MouseSensitivity * mouseSensitivityMultiplier;
 
         xRotation -= mouseY;
         yRotation -= mouseX;

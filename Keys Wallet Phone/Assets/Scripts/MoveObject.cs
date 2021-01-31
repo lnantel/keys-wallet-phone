@@ -49,7 +49,7 @@ public class MoveObject : MonoBehaviour
             print("Object Grabbed");
             grabbedObject = lookingAt;
 
-            mouse.mouseSensitivityMultiplier = 0.33f;
+            mouse.mouseSensitivityMultiplier = 0.5f;
             Rigidbody grabbedObjectRigidbody = grabbedObject.GetComponent<Rigidbody>();
             originalAngularDrag = grabbedObjectRigidbody.angularDrag;
             grabbedObjectRigidbody.angularDrag = 100.0f;
