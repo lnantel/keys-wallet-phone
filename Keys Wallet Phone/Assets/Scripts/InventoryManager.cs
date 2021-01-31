@@ -74,11 +74,13 @@ public class InventoryManager : MonoBehaviour
         objToDrop.Drop(RandomPos);
     }
 
+    // TODO : Add bounds
     private Vector3 GetRandomPosition()
     {
-        float x = Random.Range(-5f, 5f);
-        float y = Random.Range(1f, 2f);
-        float z = Random.Range(-5f, 5f);
+        Vector3 playerPos = PlayerController.instance.transform.position;
+        float x = playerPos.x + Random.Range(-2f, 2f);
+        float y = playerPos.y + 1f;
+        float z = playerPos.z + Random.Range(-2f, 2f);
 
         return new Vector3(x, y, z);
     }
