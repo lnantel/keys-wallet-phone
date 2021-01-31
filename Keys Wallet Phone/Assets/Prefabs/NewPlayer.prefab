@@ -57,6 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2325166832003596879}
   - component: {fileID: 2325166832003596878}
+  - component: {fileID: 1340857348}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -90,6 +91,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1340857348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2325166832003596912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 20a705aea2d80e0478fb89b6f43d8530, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &2325166832897980188
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,8 +185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b744104db20d292498b296eb2f59677d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 0
-  sprintSpeed: 0
+  walkSpeed: 100
+  sprintSpeed: 200
   rotationSpeed: 0
   IsSprinting: 0
 --- !u!114 &2325166832613570161

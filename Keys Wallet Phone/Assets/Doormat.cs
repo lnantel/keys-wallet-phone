@@ -158,7 +158,7 @@ public class Doormat : MonoBehaviour
 
             case DoormatEventState.Phone:
                 {
-                    SceneManager.LoadScene("WinScreen");
+                    LevelManager.instance.LoadScene("WinScreen", Color.white);
                     break;
                 }
         }
