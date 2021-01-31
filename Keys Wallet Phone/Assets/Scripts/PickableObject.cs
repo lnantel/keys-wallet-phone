@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Rigidbody))]
 public class PickableObject : MonoBehaviour
@@ -11,7 +10,7 @@ public class PickableObject : MonoBehaviour
     public static Action<PickableObject> objecPickedUp;
     public string objectName;
 
-    private MeshRenderer _MeshRenderer;
+    public GameObject _Model;
     private Collider _Collider;
     private Rigidbody _RigidBody;
     private bool _isEnabled;
@@ -29,7 +28,6 @@ public class PickableObject : MonoBehaviour
 
     private void Awake()
     {
-        _MeshRenderer = GetComponent<MeshRenderer>();
         _Collider = GetComponent<Collider>();
         _RigidBody = GetComponent<Rigidbody>();
     }
@@ -67,7 +65,7 @@ public class PickableObject : MonoBehaviour
 
     private void DisableObject()
     {
-        _MeshRenderer.enabled = false;
+        _Model.SetActive(false);
         _Collider.enabled = false;
         _RigidBody.isKinematic = true;
         _isEnabled = false;
@@ -81,7 +79,7 @@ public class PickableObject : MonoBehaviour
         if (_isPickedUp)
             return;
 
-        _MeshRenderer.enabled = true;
+        _Model.SetActive(true);
         _Collider.enabled = true;
         _RigidBody.isKinematic = false;
         _isEnabled = true;

@@ -25,20 +25,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
     private void OnEnable()
     {
         SceneManager.sceneLoaded += AssignPlayer;
+        SceneManager.sceneLoaded += AssignCursor;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= AssignPlayer;
+        SceneManager.sceneLoaded -= AssignCursor;
     }
 
     private void AssignPlayer(Scene scene, LoadSceneMode loadSceneMode)
@@ -49,6 +45,20 @@ public class GameManager : MonoBehaviour
         {
             if (playerLoaded != null)
                 playerLoaded(CurrentPlayer);
+        }
+    }
+
+    private void AssignCursor(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        if (scene.name == "Main")
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 }
