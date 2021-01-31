@@ -183,7 +183,11 @@ MonoBehaviour:
   m_text: 'You can navigate with W/A/S/D or the Arrow Keys.
 
     You can grab items
-    by holding the left mouse button while hovering over them.'
+    by holding the left mouse button while hovering over them.
+
+
+    Hurry up by
+    pressing Left Shift!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cc8f29a3b8fe0b948b540fa82fd55966, type: 2}
   m_sharedMaterial: {fileID: 7535764355069217341, guid: cc8f29a3b8fe0b948b540fa82fd55966, type: 2}
