@@ -9,11 +9,11 @@ public class MoveObject : MonoBehaviour
     public GameObject springConnection;
     public GameObject grabbedObject;
     public GameObject lookingAt;
-    public LayerMask layerMask;
 
     private SpringJoint springJoint;
     private float originalAngularDrag;
     private SimpleMouseLook mouse;
+    private LayerMask layerMask;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +21,7 @@ public class MoveObject : MonoBehaviour
         castDist = 2;
         springJoint = springConnection.GetComponent<SpringJoint>();
         mouse = GetComponent<SimpleMouseLook>();
+        layerMask = LayerMask.GetMask("CollidableObjects", "Default");
     }
 
     // Update is called once per frame
@@ -30,6 +31,8 @@ public class MoveObject : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && grabbedObject == null) GrabObject();
 
         bool raycast = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, castDist, layerMask, QueryTriggerInteraction.UseGlobal);
+        if (raycast)
+            raycast = hit.transform.gameObject.layer == LayerMask.NameToLayer("CollidableObjects");
         if (raycast && grabbedObject == null && lookingAt == null)
         {
             lookingAt = hit.transform.gameObject;
