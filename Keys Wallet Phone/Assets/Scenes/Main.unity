@@ -1394,6 +1394,28 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2125707702334565350, guid: 70ab64209b29e724087b5a0e0a33f65f, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 2125707702334565350, guid: 70ab64209b29e724087b5a0e0a33f65f, type: 3}
+      propertyPath: m_text
+      value: '00:00
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2125707702334565350, guid: 70ab64209b29e724087b5a0e0a33f65f, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2125707702334565350, guid: 70ab64209b29e724087b5a0e0a33f65f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a65a630c5a738a147acbc24f05c8e660, type: 2}
+    - target: {fileID: 2125707702334565350, guid: 70ab64209b29e724087b5a0e0a33f65f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2237365515047804808, guid: a65a630c5a738a147acbc24f05c8e660, type: 2}
     - target: {fileID: 5682774980107482004, guid: 70ab64209b29e724087b5a0e0a33f65f, type: 3}
       propertyPath: m_Name
       value: PickUpPrompt

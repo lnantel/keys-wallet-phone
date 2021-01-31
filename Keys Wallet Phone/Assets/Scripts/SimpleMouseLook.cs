@@ -25,6 +25,8 @@ public class SimpleMouseLook : MonoBehaviour
     public float CurrentTrembleAmplitude { get; set; }
     public float CurrentTrembleFrequency { get; set; }
 
+    private bool overrideControls;
+
     private void Awake()
     {
         _Vcam = GetComponent<CinemachineVirtualCamera>();
@@ -34,15 +36,40 @@ public class SimpleMouseLook : MonoBehaviour
     private void OnEnable()
     {
         DropSystem.playerCollided += Shake;
+        TimerManager.timerStep += AddTremble;
+        Doormat.playerOnDoormat += DisableControls;
+        Doormat.playerExitDoormat += EnableControls;
     }
 
     private void OnDisable()
     {
         DropSystem.playerCollided -= Shake;
+        TimerManager.timerStep -= AddTremble;
+        Doormat.playerOnDoormat -= DisableControls;
+        Doormat.playerExitDoormat -= EnableControls;
+    }
+
+    private void DisableControls()
+    {
+        overrideControls = true;
+    }
+
+    private void EnableControls()
+    {
+        overrideControls = false;
+    }
+
+    private void AddTremble()
+    {
+        CurrentTrembleAmplitude += 0.2f;
+        CurrentTrembleFrequency += 1f;
     }
 
     private void Update()
     {
+        if (overrideControls)
+            return;
+
         MouseRotation();
         _Noise.m_AmplitudeGain = CurrentTrembleAmplitude + m_CurrentShakeAmplitude;
         _Noise.m_FrequencyGain = CurrentTrembleFrequency + m_CurrentShakeFrequency;
@@ -50,7 +77,7 @@ public class SimpleMouseLook : MonoBehaviour
 
     private void Shake()
     {
-        SimpleShake(0.7f, 1f, 20f);
+        SimpleShake(0.3f, 0.3f, 20f);
     }
 
     private void MouseRotation()

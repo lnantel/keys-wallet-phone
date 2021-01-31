@@ -9,12 +9,17 @@ using TMPro;
 
 public class TimerManager : MonoBehaviour
 {
+    public static Action timerStep;
+
     public TextMeshProUGUI timerText;
     public Volume volume;
     private ColorAdjustments _ColorAdj;
     private ChromaticAberration _ChromaticAb;
     public float timerDuration;
     private float _CurrentTime;
+
+    private string _BaseText = "";
+    private string _LastText = "";
 
     public List<string> timerSteps = new List<string>();
     private int _CurrentStepIndex;
@@ -47,14 +52,16 @@ public class TimerManager : MonoBehaviour
 
     private void UpdateTimerUI()
     {
-        timerText.text = TimeSpan.FromSeconds(_CurrentTime).ToString(@"mm\:ss\.ff");
+        timerText.text = _BaseText + TimeSpan.FromSeconds(_CurrentTime).ToString(@"mm\:ss\.ff");
     }
 
     private IEnumerator ResetTimer()
     {
         yield return new WaitForSeconds(0.3f);
 
-        timerText.text = timerSteps[_CurrentStepIndex];
+        _BaseText += timerSteps[_CurrentStepIndex] + "\n";
+
+        timerText.text = _BaseText;
         _CurrentStepIndex++;
         
         _ColorAdj.saturation.value -= 10;
@@ -64,8 +71,13 @@ public class TimerManager : MonoBehaviour
         {
             // Trigger end game
             Debug.Log("END GAME");
-            SceneManager.LoadScene("LoseScreen");
-            
+            LevelManager.instance.LoadScene("LoseScreen", Color.red);            
+        }
+
+        else
+        {
+            if (timerStep != null)
+                timerStep();
         }
 
         yield return new WaitForSeconds(1f);

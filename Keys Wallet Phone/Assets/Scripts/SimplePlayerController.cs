@@ -12,6 +12,7 @@ public class SimplePlayerController : MonoBehaviour
     private Vector3 _GlobalVelocity;
 
     public bool IsSprinting;
+    private bool overrideControls;
 
     private void Awake()
     {
@@ -23,8 +24,36 @@ public class SimplePlayerController : MonoBehaviour
         IsSprinting = Input.GetKey(KeyCode.LeftShift);
     }
 
+    private void OnEnable()
+    {
+        Doormat.playerOnDoormat += DisableControls;
+        Doormat.playerExitDoormat += EnableControls;
+    }
+
+    private void OnDisable()
+    {
+        Doormat.playerOnDoormat -= DisableControls;
+        Doormat.playerExitDoormat -= EnableControls;
+    }
+
+    void DisableControls()
+    {
+        overrideControls = true;
+    }
+
+    void EnableControls()
+    {
+        overrideControls = false;
+    }
+
     private void FixedUpdate()
     {
+        if (overrideControls)
+        {
+            _RigidBody.velocity = Vector3.zero;
+            return;
+        }
+
         float currentMoveSpeed = IsSprinting ? sprintSpeed : walkSpeed;
 
         float moveX = Input.GetAxis("Horizontal");
