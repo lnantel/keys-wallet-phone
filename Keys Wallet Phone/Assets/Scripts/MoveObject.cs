@@ -64,8 +64,8 @@ public class MoveObject : MonoBehaviour
     public void ReleaseObject()
     {
 
-        //Destroy(grabbedObject.GetComponent<SpringJoint>().connectedBody);
-        grabbedObject.GetComponent<SpringJoint>().connectedBody = null;
+        
+        Destroy(grabbedObject.GetComponent<SpringJoint>());
         Destroy(hit.transform.gameObject.GetComponent<Outline>());
         grabbedObject = null;
         hasSpringJoint = true;
