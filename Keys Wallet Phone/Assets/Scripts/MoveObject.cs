@@ -43,11 +43,15 @@ public class MoveObject : MonoBehaviour
             
                 case false :
                     hit.transform.gameObject.AddComponent<SpringJoint>().connectedBody = springConnection.GetComponent<Rigidbody>();
+                    hit.transform.gameObject.AddComponent<Outline>().OutlineColor = Color.white;
+                    hit.transform.gameObject.GetComponent<Outline>().OutlineWidth = 10;
                     grabbedObject = hit.transform.gameObject;
                     break;
 
                 case true :
                     hit.transform.gameObject.GetComponent<SpringJoint>().connectedBody = springConnection.GetComponent<Rigidbody>();
+                    hit.transform.gameObject.AddComponent<Outline>().OutlineColor = Color.white;
+                    hit.transform.gameObject.GetComponent<Outline>().OutlineWidth = 10;
                     grabbedObject = hit.transform.gameObject;
                     break;
             }
@@ -62,6 +66,7 @@ public class MoveObject : MonoBehaviour
 
         //Destroy(grabbedObject.GetComponent<SpringJoint>().connectedBody);
         grabbedObject.GetComponent<SpringJoint>().connectedBody = null;
+        Destroy(hit.transform.gameObject.GetComponent<Outline>());
         grabbedObject = null;
         hasSpringJoint = true;
         print("Object Released");
