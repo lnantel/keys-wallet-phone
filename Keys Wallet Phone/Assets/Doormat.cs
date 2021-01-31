@@ -126,6 +126,7 @@ public class Doormat : MonoBehaviour
                         else
                         {
                             StartEndTimer();
+                            missingObject();
                         }
                         break;
                     }
@@ -149,6 +150,7 @@ public class Doormat : MonoBehaviour
                         else
                         {
                             StartEndTimer();
+                            missingObject();
                         }
                         break;
                     }
@@ -171,6 +173,7 @@ public class Doormat : MonoBehaviour
                         else
                         {
                             StartEndTimer();
+                            missingObject();
                         }
                         break;
                     }
