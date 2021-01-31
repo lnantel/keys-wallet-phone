@@ -8,13 +8,15 @@ public class MoveObject : MonoBehaviour
     public int castDist;
     public GameObject springConnection;
     public GameObject grabbedObject;
+    public GameObject lookingAt;
     public bool releaseTimer;
     public bool hasSpringJoint;
+    public LayerMask layerMask;
     
     // Start is called before the first frame update
     void Start()
     {
-        castDist = 5;
+        castDist = 2;
         releaseTimer = true;
         hasSpringJoint = false;
     }
@@ -25,11 +27,25 @@ public class MoveObject : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && grabbedObject != null ) ReleaseObject();
 
         if(Input.GetMouseButtonDown(0) && grabbedObject == null && releaseTimer) GrabObject();
+
+
+
+        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, castDist,layerMask,QueryTriggerInteraction.UseGlobal) && !grabbedObject && !lookingAt)
+        {
+            lookingAt = hit.transform.gameObject;
+            hit.transform.gameObject.AddComponent<Outline>().OutlineColor = Color.blue;
+            hit.transform.gameObject.GetComponent<Outline>().OutlineWidth = 10;
+        }
+        if(!Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, castDist,layerMask,QueryTriggerInteraction.UseGlobal) && !grabbedObject && lookingAt)
+        {
+            if(lookingAt.GetComponent<Outline>() != null) Destroy(lookingAt.GetComponent<Outline>());
+            lookingAt = null;
+        }
     }
 
     public void GrabObject()
     {
-        if(Physics.Raycast(transform.position, transform.forward, out hit, castDist) && hit.transform.gameObject.layer == 10)
+        if(Physics.Raycast(transform.position, transform.forward, out hit, castDist,layerMask,QueryTriggerInteraction.UseGlobal))
         {
             print("Object Grabbed");
         
@@ -43,7 +59,7 @@ public class MoveObject : MonoBehaviour
             
                 case false :
                     hit.transform.gameObject.AddComponent<SpringJoint>().connectedBody = springConnection.GetComponent<Rigidbody>();
-                    hit.transform.gameObject.AddComponent<Outline>().OutlineColor = Color.white;
+                    hit.transform.gameObject.GetComponent<Outline>().OutlineColor = Color.white;
                     hit.transform.gameObject.GetComponent<Outline>().OutlineWidth = 10;
                     grabbedObject = hit.transform.gameObject;
                     break;
@@ -66,7 +82,7 @@ public class MoveObject : MonoBehaviour
 
         
         Destroy(grabbedObject.GetComponent<SpringJoint>());
-        Destroy(hit.transform.gameObject.GetComponent<Outline>());
+        Destroy(grabbedObject.GetComponent<Outline>());
         grabbedObject = null;
         hasSpringJoint = true;
         print("Object Released");
