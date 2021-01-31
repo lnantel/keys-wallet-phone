@@ -263,7 +263,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 296.1, y: -362.2}
-  m_SizeDelta: {x: 444.7516, y: 98.05917}
+  m_SizeDelta: {x: 800, y: 98.05917}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &357073193
 MonoBehaviour:
@@ -277,6 +277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5712db413dc6f0c4397f9916b84d869e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 0}
+  mouseSensSlider: {fileID: 0}
 --- !u!114 &357073194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,6 +582,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5712db413dc6f0c4397f9916b84d869e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 0}
+  mouseSensSlider: {fileID: 0}
 --- !u!114 &1104078824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -718,6 +722,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5712db413dc6f0c4397f9916b84d869e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 0}
+  mouseSensSlider: {fileID: 0}
 --- !u!1 &1249385227
 GameObject:
   m_ObjectHideFlags: 0
