@@ -10,6 +10,8 @@ public class PickableObject : MonoBehaviour
     public static Action<PickableObject> objecPickedUp;
     public string objectName;
 
+    public Vector3[] spawnPosition; 
+
     public GameObject _Model;
     private Collider _Collider;
     private Rigidbody _RigidBody;
@@ -30,6 +32,7 @@ public class PickableObject : MonoBehaviour
     {
         _Collider = GetComponent<Collider>();
         _RigidBody = GetComponent<Rigidbody>();
+                
     }
 
     private void Start()
@@ -83,6 +86,16 @@ public class PickableObject : MonoBehaviour
         _Collider.enabled = true;
         _RigidBody.isKinematic = false;
         _isEnabled = true;
+    }
+
+    public void Drop()
+    {
+        _isPickedUp = false;
+        if(spawnPosition.Length != 0) 
+        {
+            this.transform.position = spawnPosition[UnityEngine.Random.Range(0,9)];
+            print("Object Dropped " + this.transform.position);
+        }
     }
 
     public void Drop(Vector3 dropPosition)

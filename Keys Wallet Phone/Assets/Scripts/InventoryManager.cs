@@ -70,8 +70,9 @@ public class InventoryManager : MonoBehaviour
         PickableObject objToDrop = _objectsInInventory[dropIndex];
         RemoveFromInventory(objToDrop);
 
-        Vector3 RandomPos = GetRandomPosition();
-        objToDrop.Drop(RandomPos);
+        objToDrop.Drop();
+        //Vector3 RandomPos = GetRandomPosition();
+        //objToDrop.Drop(RandomPos);
     }
 
     // TODO : Add bounds
