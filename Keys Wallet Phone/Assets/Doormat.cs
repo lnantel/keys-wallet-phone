@@ -118,7 +118,7 @@ public class Doormat : MonoBehaviour
                         }
                         else
                         {
-                            StartEndTimer(keysImage);
+                            StartEndTimer();
                         }
                         break;
                     }
@@ -140,7 +140,7 @@ public class Doormat : MonoBehaviour
                         }
                         else
                         {
-                            StartEndTimer(walletImage);
+                            StartEndTimer();
                         }
                         break;
                     }
@@ -161,7 +161,7 @@ public class Doormat : MonoBehaviour
                         }
                         else
                         {
-                            StartEndTimer(phoneImage);
+                            StartEndTimer();
                         }
                         break;
                     }
@@ -184,25 +184,47 @@ public class Doormat : MonoBehaviour
         Phone
     }
 
-    private void StartEndTimer(GameObject missingObject)
+    private void StartEndTimer()
     {
         if (_currentEndTimer != null)
             return;
 
-        _currentEndTimer = EndEventTimer(missingObject);
+        _currentEndTimer = EndEventTimer();
         StartCoroutine(_currentEndTimer);
     }
 
-    private IEnumerator EndEventTimer(GameObject missingObject)
+    private IEnumerator EndEventTimer()
     {
-        missingObject.SetActive(true);
-        TextMeshProUGUI missingText = missingObject.GetComponentInChildren<TextMeshProUGUI>();
-        missingText.color = Color.red;
+        TextMeshProUGUI keysText = keysImage.GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI walletText = walletImage.GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI phoneText = phoneImage.GetComponentInChildren<TextMeshProUGUI>();
+
+        keysImage.SetActive(true);
+        walletImage.SetActive(true);
+        phoneImage.SetActive(true);
+
+        if (!InventoryManager.instance.CheckForObject("Keys"))
+        {
+            keysText.color = Color.red;
+        }
+
+        if (!InventoryManager.instance.CheckForObject("Wallet"))
+        {
+            walletText.color = Color.red;
+        }
+
+        if (!InventoryManager.instance.CheckForObject("Phone"))
+        {
+            phoneText.color = Color.red;
+        }
 
         yield return new WaitForSeconds(1f);
         _currentEndTimer = null;
         EndDoorEvent();
-        missingText.color = Color.white;
+
+        keysText.color = Color.white;
+        walletText.color = Color.white;
+        phoneText.color = Color.white;
     }
         
 }
