@@ -15,11 +15,23 @@ public class CameraController : MonoBehaviour {
     private CinemachineVirtualCamera cam;
     private float defaultFOV;
 
+    private bool overrideControls;
+
     void Awake() {
         if (instance != null)
             Destroy(gameObject);
         else
             instance = this;
+    }
+
+    private void OnEnable(){
+        Doormat.playerOnDoormat += DisableControls;
+        Doormat.playerExitDoormat += EnableControls;
+    }
+
+    private void OnDisable(){
+        Doormat.playerOnDoormat -= DisableControls;
+        Doormat.playerExitDoormat -= EnableControls;
     }
 
     void Start() {
@@ -28,7 +40,21 @@ public class CameraController : MonoBehaviour {
         defaultFOV = cam.m_Lens.FieldOfView;
     }
 
+    void DisableControls()
+    {
+        //overrideControls = true;
+    }
+
+    void EnableControls()
+    {
+        //overrideControls = false;
+    }
+
     void LateUpdate() {
+        // Don't move if controls are overriden by event
+        if (overrideControls)
+            return;
+
         //POSITION
         transform.position = Vector3.Lerp(transform.position, PlayerStateManager.instance.transform.position + m_CameraHeight * Vector3.up, Time.deltaTime / Time.fixedDeltaTime);
 

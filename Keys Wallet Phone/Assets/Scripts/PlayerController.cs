@@ -16,11 +16,23 @@ public class PlayerController : MonoBehaviour {
     private float fallingSpeed;
     private float jumpSpeed;
 
+    private bool overrideControls;
+
     void Awake() {
         if (instance != null)
             Destroy(gameObject);
         else
             instance = this;
+    }
+
+    private void OnEnable(){
+        Doormat.playerOnDoormat += DisableControls;
+        Doormat.playerExitDoormat += EnableControls;
+    }
+
+    private void OnDisable(){
+        Doormat.playerOnDoormat -= DisableControls;
+        Doormat.playerExitDoormat -= EnableControls;
     }
 
     void Start() {
@@ -29,7 +41,21 @@ public class PlayerController : MonoBehaviour {
         input = PlayerInputManager.instance;
     }
 
+    void DisableControls(){
+        overrideControls = true;
+    }
+
+    void EnableControls(){
+        overrideControls = false;
+    }
+
     void Update() {
+        // Don't move if controls are overriden by event
+        if (overrideControls){
+            rb.velocity = Vector3.zero;
+            return;
+        }
+
         rb.MoveRotation(Quaternion.Euler(0.0f, CameraController.instance.Yaw, 0.0f));
 
         Vector3 displacement = CalculateMovement();

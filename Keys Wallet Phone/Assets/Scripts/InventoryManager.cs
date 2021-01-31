@@ -46,7 +46,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     // Function that checks if an object is picked up in inventory (uses object name/string)
-    private bool CheckForObject(string objectName)
+    public bool CheckForObject(string objectName)
     {
         var found = _objectsInInventory.Find(x => x.objectName == objectName);
 
