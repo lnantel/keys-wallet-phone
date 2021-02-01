@@ -9,7 +9,7 @@ public class SwitchScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(LoadLevelAfterDelay(delay));
+        //StartCoroutine(LoadLevelAfterDelay(delay));
     }
 
     IEnumerator LoadLevelAfterDelay(float delay)
@@ -17,6 +17,11 @@ public class SwitchScene : MonoBehaviour
         print("Prep Switching Scene");
         yield return new WaitForSeconds(delay);
         print("Switching Scene");
+        LevelManager.instance.LoadScene("Main", Color.black);
+    }
+
+    public void StartGame()
+    {
         LevelManager.instance.LoadScene("Main", Color.black);
     }
 }

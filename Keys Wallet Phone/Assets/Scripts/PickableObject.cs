@@ -16,6 +16,7 @@ public class PickableObject : MonoBehaviour
     public GameObject _Model;
     private Collider _Collider;
     private Rigidbody _RigidBody;
+    private ParticleSystem _ParticleSystem;
     private bool _isEnabled;
     private bool _isPickedUp;
 
@@ -33,7 +34,7 @@ public class PickableObject : MonoBehaviour
     {
         _Collider = GetComponent<Collider>();
         _RigidBody = GetComponent<Rigidbody>();
-                
+        _ParticleSystem = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Start()
@@ -73,6 +74,7 @@ public class PickableObject : MonoBehaviour
         _Collider.enabled = false;
         _RigidBody.isKinematic = true;
         _isEnabled = false;
+        _ParticleSystem.Stop();
     }
 
     private void EnableObject()
@@ -87,6 +89,7 @@ public class PickableObject : MonoBehaviour
         _Collider.enabled = true;
         _RigidBody.isKinematic = false;
         _isEnabled = true;
+        _ParticleSystem.Play();
     }
 
     public void Drop()
@@ -94,10 +97,13 @@ public class PickableObject : MonoBehaviour
         _isPickedUp = false;
         if(spawnPosition.Length != 0) 
         {
-            this.transform.position = spawnPosition[UnityEngine.Random.Range(0,9)];
+            Vector3 spawnPos = spawnPosition[UnityEngine.Random.Range(0, 9)];
+            spawnPos.y = 3f;
+            this.transform.position = spawnPos;
             print("Object Dropped " + this.transform.position);
         }
-        objectDropped(this);
+        if (objectDropped != null)
+            objectDropped(this);
     }
 
     public void Drop(Vector3 dropPosition)

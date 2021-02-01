@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -25,12 +26,19 @@ public class InventoryManager : MonoBehaviour
     {
         PickableObject.objecPickedUp += AddToInventory;
         DropSystem.objectDrop += DropRandomObject;
+        SceneManager.sceneLoaded += ResetOnLoad;
     }
 
     private void OnDisable()
     {
         PickableObject.objecPickedUp -= AddToInventory;
         DropSystem.objectDrop -= DropRandomObject;
+        SceneManager.sceneLoaded -= ResetOnLoad;
+    }
+
+    private void ResetOnLoad(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        _objectsInInventory.Clear();
     }
 
     private void AddToInventory(PickableObject obj)
@@ -52,8 +60,10 @@ public class InventoryManager : MonoBehaviour
 
         if (found != null)
         {
+            Debug.Log("Found : " + objectName);
             return true;
         }
+        Debug.Log("Could not find : " + objectName);
         return false;
     }
 
@@ -68,9 +78,9 @@ public class InventoryManager : MonoBehaviour
         int dropIndex = Random.Range(0, objectCount);
 
         PickableObject objToDrop = _objectsInInventory[dropIndex];
+        objToDrop.Drop();
         RemoveFromInventory(objToDrop);
 
-        objToDrop.Drop();
         //Vector3 RandomPos = GetRandomPosition();
         //objToDrop.Drop(RandomPos);
     }
