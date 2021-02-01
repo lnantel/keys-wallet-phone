@@ -41,6 +41,11 @@ public class PickableObject : MonoBehaviour
     {
         _isEnabled = true;
         _isPickedUp = false;
+        if (spawnPosition.Length != 0) {
+            Vector3 spawnPos = spawnPosition[UnityEngine.Random.Range(0, 9)];
+            this.transform.position = spawnPos;
+            print(objectName + " spawned at " + this.transform.position);
+        }
     }
 
     //private void OnCollisionEnter(Collision collision)
